@@ -1,14 +1,17 @@
 <?php
-	$bdd = new PDO('mysql:host=localhost;dbname=nomDB', 'root', 'pwd');
-	$reponse = …;
-	
-	
-	while (…)
-	{
-	
-	        …
+$bdd = new PDO('mysql:host=localhost;dbname=nomDB', 'root', 'pwd');
+$sqlQuery = "SELECT titre from jeux_video";
 
-	
-	}
-	$reponse->closeCursor();
+$recipesStatement = $bdd->prepare($sqlQuery);
+$recipesStatement->execute();
+$jeux = $recipesStatement->fetchAll();
+
+
+while ($jeux->next()) {
+
+	echo $jeux->getTitre();
+
+
+}
+$reponse->closeCursor();
 ?>
