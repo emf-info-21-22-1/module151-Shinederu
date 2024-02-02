@@ -5,7 +5,7 @@
  * @version 1.0 / 20-SEP-2013
  */
 
-var BASE_URL = "http://localhost:8581/joueurs.php";
+var BASE_URL = "https://jeannerett.emf-informatique.ch/151/PHP/Ex5/joueurs.php";
 
 /**
  * Fonction permettant de charger les données d'équipe.
