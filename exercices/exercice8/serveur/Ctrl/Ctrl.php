@@ -13,7 +13,9 @@ class Ctrl
     public function getEquipes()
     {
 
-        $this->wrk->getEquipes();
+        $listeEquipe = $this->wrk->getEquipes();
+
+        echo json_encode($listeEquipe);
 
     }
 
@@ -21,7 +23,9 @@ class Ctrl
     public function getJoueurs($pkEquipe)
     {
 
-        $this->wrk->getJoueurs($pkEquipe);
+        $listeJoueurs = $this->wrk->getJoueurs($pkEquipe);
+
+        echo json_encode($listeJoueurs);
 
     }
 

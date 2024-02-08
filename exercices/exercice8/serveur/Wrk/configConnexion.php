@@ -1,42 +1,8 @@
 <?php
-class dbConnexion{
-
-    private $bdd = null;
-
-    public function __construct($host , $port, $dbName, $charset, $user, $password){
-        $this->bdd = new PDO('mysql:host=$host;port=3306;dbname=hockey_stats;charset=utf8', '$user', 'emf123');
-    
-    }
-
-    public function getJoueurs($pkEquipe): array{
-        $sqlQuery = "SELECT nom, points from t_joueur where FK_equipe=$pkEquipe";
-
-        $recipesStatement = $bdd->prepare($sqlQuery);
-        $recipesStatement->execute();
-
-        $joueurs = $recipesStatement->fetchAll();
-
-        $reponse->closeCursor();
-
-        return $joueurs;
-    }
-
-
-    public function getEquipes(): array{
-        $sqlQuery = "SELECT PK_equipe, nom from t_equipe";
-
-        $recipesStatement = $bdd->prepare($sqlQuery);
-        $recipesStatement->execute();
-
-        $equipes = $recipesStatement->fetchAll();
-
-        $listeEquipes = new ArrayObject();
-
-        
-        return $listeEquipes
-    }
-
-
-
-}
+define("DB_TYPE","mysql");
+define("DB_HOST","host.docker.internal");
+define("DB_NAME","hockey_stats");
+define("DB_USER","root");
+define("DB_PASS","emf123");
+define("DB_PORT","3386");
 ?>

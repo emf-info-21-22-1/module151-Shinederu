@@ -13,14 +13,19 @@
  */
 function chargerTeamSuccess(data, text, jqXHR) {
     // Appelé lorsque la liste des équipes est reçue
+
     var cmbEquipes = document.getElementById("cmbEquipes");
     cmbEquipes.options.length = 0;
-    $(data).find("equipe").each(function () {
+    for (let i = 0; i < data.length; i++) {
+        var team = data[i];
+        var pk = team.PK_equipe;
+        var name = team.nom
         var equipe = new Equipe();
-        equipe.setPk($(this).find("id").text());
-        equipe.setNom($(this).find("nom").text());
+        equipe.setNom(name);
+        equipe.setPk(pk);
         cmbEquipes.options[cmbEquipes.options.length] = new Option(equipe, JSON.stringify(equipe));
-    });
+    }
+
 }
 
 /**
@@ -35,16 +40,15 @@ function chargerPlayerSuccess(data, text, jqXHR) {
     // A COMPLETER!!! selon la logique suivante:
 
 
-    $(data).find("joueur").each(function () {
+    for (let i = 0; i < data.length; i++) {
+        var player = data[i];
+        var nom = player.nom;
+        var points = player.points;
         var joueur = new Joueur();
-        joueur.setNom($(this).find("nom").text());
-        joueur.setPoints($(this).find("points").text());
-
+        joueur.setNom(nom);
+        joueur.setPoints(points);
         cmbJoueurs.options[cmbJoueurs.options.length] = new Option(joueur, JSON.stringify(joueur));
-
-    })
-
-
+    }
     // cmbJoueurs.options[cmbJoueurs.options.length] = new Option(<ce qui sera affiché>, <la valeur de la cellule>));
 }
 

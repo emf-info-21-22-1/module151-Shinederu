@@ -1,5 +1,6 @@
 <?php
-class Equipe{
+class Equipe
+{
 
     private $nom = "";
 
@@ -8,5 +9,5 @@ class Equipe{
         return $this->nom;
     }
 
-
+}
 ?>

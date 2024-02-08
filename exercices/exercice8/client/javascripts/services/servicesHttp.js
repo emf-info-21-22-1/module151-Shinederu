@@ -5,7 +5,7 @@
  * @version 1.0 / 20-SEP-2013
  */
 
-var BASE_URL = "https://jeannerett.emf-informatique.ch/151/PHP/Ex5/joueurs.php";
+var BASE_URL = "http://localhost:8081/connexion.php";
 
 /**
  * Fonction permettant de charger les données d'équipe.
@@ -15,7 +15,7 @@ var BASE_URL = "https://jeannerett.emf-informatique.ch/151/PHP/Ex5/joueurs.php";
 function chargerTeam(successCallback, errorCallback) {
     $.ajax({
         type: "GET",
-        dataType: "xml",
+        dataType: "json",
         url: BASE_URL,
         data: 'action=equipe',
         success: successCallback,
@@ -33,7 +33,7 @@ function chargerTeam(successCallback, errorCallback) {
 function chargerPlayers(teamid, successCallback, errorCallback) {
     $.ajax({
         type: "GET",
-        dataType: "xml",
+        dataType: "json",
         url: BASE_URL,
         data: 'action=joueur&equipeId=' + teamid,
         success: successCallback,
