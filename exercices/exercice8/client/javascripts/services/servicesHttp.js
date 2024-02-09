@@ -5,7 +5,7 @@
  * @version 1.0 / 20-SEP-2013
  */
 
-var BASE_URL = "http://localhost:8081/connexion.php";
+var BASE_URL = "http://localhost:8081/main.php";
 
 /**
  * Fonction permettant de charger les données d'équipe.

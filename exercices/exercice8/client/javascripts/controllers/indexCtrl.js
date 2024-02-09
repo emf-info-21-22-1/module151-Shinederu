@@ -18,7 +18,7 @@ function chargerTeamSuccess(data, text, jqXHR) {
     cmbEquipes.options.length = 0;
     for (let i = 0; i < data.length; i++) {
         var team = data[i];
-        var pk = team.PK_equipe;
+        var pk = team.id;
         var name = team.nom
         var equipe = new Equipe();
         equipe.setNom(name);

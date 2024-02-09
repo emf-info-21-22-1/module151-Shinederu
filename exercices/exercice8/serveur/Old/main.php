@@ -12,6 +12,7 @@ $ctrl = new Ctrl();
 
 if ($_GET['action'] == "equipe")
 {
+	$equipes = new EquipeCtrl();
 	$ctrl->getEquipes();
 }
 
@@ -19,6 +20,7 @@ if ($_GET['action'] == "joueur")
 {
 	if (isset($_GET["equipeId"]))
 	{
+		$joueurs = new JoueurCtrl();
 		$ctrl->getJoueurs($_GET["equipeId"]);
 	}
 }

@@ -5,7 +5,7 @@ class Wrk
     private $dbConnexion = null;
     public function __construct()
     {
-        $this->dbConnexion = new dbConnexion();
+        $this->dbConnexion = new Connexion();
     }
 
 
