@@ -1,8 +1,8 @@
 # Projet
 Repository du projet personnel du module 151
 
-## Titre du projet
-Ananas
+## Titre du projet: Ananas
+
 
 ### Description du projet
 Ce projet, nommé « Ananas », sera un site type « Réseau social » principalement inspiré du célèbre site « 𝕏 ».
