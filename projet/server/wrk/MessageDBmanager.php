@@ -29,7 +29,7 @@ class MessageDBManager
     public function addOne($date, $message, $fkUser)
     {
 
-        $query = $this->connexion->insertQuery("insert into t_message (date, message, fkUser) values (?, ?, ?);", array($date, $message, $fkUser));
+        $query = $this->connexion->executeQuery("insert into t_message (date, message, fkUser) values (?, ?, ?);", array($date, $message, $fkUser));
 
 
 
@@ -40,7 +40,7 @@ class MessageDBManager
     public function deleteOne($pkMessage)
     {
 
-        $query = $this->connexion->deleteQuery("delete from t_message where pkMessage = ?;", array($pkMessage));
+        $query = $this->connexion->executeQuery("delete from t_message where pkMessage = ?;", array($pkMessage));
 
         return $query;
 

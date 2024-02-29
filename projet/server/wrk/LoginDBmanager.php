@@ -6,8 +6,7 @@ class LoginDBManager
 
     public function __construct()
     {
-
-        $this->connexion = connexion::getInstance();
+        $this->connexion = Connexion::getInstance();
     }
 
     public function checkLogin($user, $password)
@@ -16,7 +15,7 @@ class LoginDBManager
         if ($query->rowCount() == 1) {
             $result = $query->fetch();
         } else {
-            $result = false;
+            $result = -1;
         }
         return $result;
     }
