@@ -1,6 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: http://localhost:8980');
 header('Access-Control-Allow-Credentials: true');
+include_once('ctrl/MessageManager.php');
 
 session_start();
 $messageManager = new MessageManager();

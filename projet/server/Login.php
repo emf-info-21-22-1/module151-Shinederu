@@ -1,5 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+include_once('ctrl/LoginManager.php');
 
 $loginManager = new LoginManager();
 switch ($_POST['action']) {

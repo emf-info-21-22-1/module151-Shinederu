@@ -2,6 +2,9 @@
 require_once('wrk/LoginDBmanager.php');
 require_once('wrk/UserDBmanager.php');
 require_once('ctrl/SessionManager.php');
+require_once('beans/User.php');
+
+
 class LoginManager
 {
 
@@ -50,7 +53,7 @@ class LoginManager
             $result = "Inscription réussie";
         }
 
-        return $result
+        return $result;
 
     }
 

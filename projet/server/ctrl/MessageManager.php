@@ -1,6 +1,7 @@
 <?php
 require_once('wrk/MessageDBmanager.php');
 require_once('ctrl/SessionManager.php');
+require_once('beans/Message.php');
 class MessageManager
 {
 
