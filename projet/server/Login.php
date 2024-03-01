@@ -1,17 +1,21 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-include_once('ctrl/LoginManager.php');
+include_once('ctrl/LoginCtrl.php');
 
-$loginManager = new LoginManager();
+$loginCtrl = new LoginCtrl();
+
 switch ($_POST['action']) {
+
     case 'checklogin':
-        echo $loginManager->checkLogin($_POST['username'], $_POST['password']);
+        
+        echo $loginCtrl->checkLogin($_POST['username'], $_POST['password']);
         break;
+
     case 'disconnect':
-        echo $loginManager->disconnect();
+        echo $loginCtrl->disconnect();
         break;
+
     case 'register':
-        echo $loginManager->register($_POST['username'], $_POST['password']);
+        echo $loginCtrl->register($_POST['username'], $_POST['password']);
         break;
 }
 ?>

@@ -1,26 +1,30 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost:8980');
-header('Access-Control-Allow-Credentials: true');
-include_once('ctrl/MessageManager.php');
+include_once('ctrl/MessageCtrl.php');
 
-session_start();
-$messageManager = new MessageManager();
-if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
-    if ($_DELETE['action'] == "delete") {
-        echo $messageManager->deleteOne($_POST['pkMessage']);
+
+$messageCtrl = new MessageCtrl();
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    if ($_GET['action'] == "getAllMessage") {
+
+        http_response_code(200);
+        echo $messageCtrl->getAllMessage();
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if ($_POST['action'] == "ajouter") {
-        echo $messageManager->addOne($_POST['message']);
+    if ($_POST['action'] == "addMessage") {
+
+        http_response_code(200);
+        echo $messageCtrl->addMessage($_POST['message']);
     }
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-    if ($_GET['action'] == "recuperer") {
-        echo $messageManager->getAll();
+if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
+    if ($_DELETE['action'] == "deleteMessage") {
+        
+        http_response_code(200);
+        echo $messageCtrl->deleteMessage($_POST['pkMessage']);
     }
 }
 

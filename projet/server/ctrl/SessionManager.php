@@ -5,15 +5,26 @@
  */
 class SessionManager
 {
+    private static $instance;
     /**
      * Create a new instance of SessionManager, it creates a new session if it already doesn't exist
      */
     public function __construct()
     {
-        if (session_status() === PHP_SESSION_NONE) {
+        if (session_id()) {
             session_start();
+           
         }
     }
+ 
+    public static function getInstance()
+    {
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
     /**
      * Return the value of an existing key stored in the session, otherwise null
      * @param string $key The searched key's value

@@ -9,15 +9,28 @@ class LoginDBManager
         $this->connexion = Connexion::getInstance();
     }
 
+    //retourne boolean en fonction de la correspondance des mdp
     public function checkLogin($username, $password)
     {
-        $query = $this->connexion->selectQuery("select pk from t_user where name=? and password=?;", array($username, $password));
-        if ($query->rowCount() == 1) {
-            $result = $query->fetch();
+        $result = $this->connexion->selectQuery("select password from t_user where pseudo=?", array($username));
+
+        if (password_verify($password, $result)) {
+            $status = true;
         } else {
-            $result = -1;
+            $status = false;
         }
-        return $result;
+
+        return $status;
+    }
+
+    public function checkUsernameAlreadyExist($username)
+    {
+        $result = $this->connexion->selectQuery("select pkUser from t_user where pseudo=?", array($username));
+        $status = false;
+        if (count($result) > 0) {
+            $status = true;
+        }
+        return $status;
     }
 
 

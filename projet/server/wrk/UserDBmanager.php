@@ -1,13 +1,12 @@
 <?php
 require_once('wrk/Connexion.php');
-require_once('bean/User.php');
+require_once('beans/User.php');
 class UserDBManager
 {
     private $connexion;
 
     public function __construct()
     {
-
         $this->connexion = connexion::getInstance();
     }
 
@@ -25,19 +24,20 @@ class UserDBManager
         return $result;
     }
 
-
-    public function getByPseudo($username)
+    //retourne l'utilisateur en partant du pseudo (unique dans la DB)
+    public function getByPseudo($username): User
     {
+        $query = $this->connexion->selectQuery("select pkUser, isAdmin from t_user where pseudo=?;", array($username));
+        $row = $query[0];
 
-        $query = $this->connexion->selectQuery("select pkUser from t_user where pseudo=?;", array($username));
-
-        $result = array();
-        foreach ($query as $row) {
-            $user = new User($row['pkUser'], $row['pseudo'], $row['isAdmin']);
-            $result[] = $user;
+        $isAdmin = false;
+        if ($row['isAdmin'] == 1) {
+            $isAdmin = true;
         }
 
-        return $result;
+        $user = new User($row['pkUser'], $username, $isAdmin);
+
+        return $user;
     }
 
 

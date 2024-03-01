@@ -1,6 +1,6 @@
 <?php
 require_once('wrk/Connexion.php');
-require_once('bean/Message.php');
+require_once('beans/Message.php');
 class MessageDBManager
 {
     private $connexion;
@@ -13,33 +13,29 @@ class MessageDBManager
 
     public function getAll()
     {
-
+        //retourne une liste de messages
         $query = $this->connexion->selectQuery("select pkMessage, date, message, fkUser from t_message;", null);
-
-        $result = array();
+        $messagesList = array();
         foreach ($query as $row) {
             $message = new Message($row['pkMessage'], $row['date'], $row['message'], $row['fkUser']);
-            $result[] = $message;
+            $messagesList[] = $message;
         }
-
-        return $result;
+        return $messagesList;
     }
 
 
-    public function addOne($date, $message, $fkUser)
+    public function addMessage($date, $message, $refUser)
     {
-
-        $query = $this->connexion->executeQuery("insert into t_message (date, message, fkUser) values (?, ?, ?);", array($date, $message, $fkUser));
-
-
+        //retourne un boolean de l'état de l'exécution
+        $query = $this->connexion->executeQuery("insert into t_message (date, message, fkUser) values (?, ?, ?);", array($date, $message, $refUser));
 
         return $query;
     }
 
 
-    public function deleteOne($pkMessage)
+    public function deleteMessage($pkMessage)
     {
-
+        //retourne un boolean de l'état de l'exécution
         $query = $this->connexion->executeQuery("delete from t_message where pkMessage = ?;", array($pkMessage));
 
         return $query;
