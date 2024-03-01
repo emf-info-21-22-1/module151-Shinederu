@@ -25,16 +25,29 @@ class UserDBManager
         return $result;
     }
 
-    
+
+    public function getByPseudo($username)
+    {
+
+        $query = $this->connexion->selectQuery("select pkUser from t_user where pseudo=?;", array($username));
+
+        $result = array();
+        foreach ($query as $row) {
+            $user = new User($row['pkUser'], $row['pseudo'], $row['isAdmin']);
+            $result[] = $user;
+        }
+
+        return $result;
+    }
+
+
 
     public function addUser($username, $password)
     {
-        $isAdmin = 0;
         $query = $this->connexion->executeQuery("insert into t_user (pseudo, password) values (?, ?);", array($username, $password));
-
         return $query;
 
-        
+
     }
 
 
@@ -48,12 +61,12 @@ class UserDBManager
     }
 
 
-    public function updateUser($pkUser, $username, $password, $isAdmin)
-{
-    $query = $this->connexion->executeQuery("update t_user set pseudo = ?, password = ?, isAdmin = ? where pkUser = ?;", array($username, $password, $isAdmin, $pkUser));
+    public function updateUser($pkUser, $username, $isAdmin)
+    {
+        $query = $this->connexion->executeQuery("update t_user set pseudo = ?, isAdmin = ? where pkUser = ?;", array($username, $isAdmin, $pkUser));
 
-    return $query;
-}
+        return $query;
+    }
 
 
 }
