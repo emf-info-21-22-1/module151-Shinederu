@@ -9,9 +9,9 @@ class LoginDBManager
         $this->connexion = Connexion::getInstance();
     }
 
-    public function checkLogin($user, $password)
+    public function checkLogin($username, $password)
     {
-        $query = $this->connexion->selectQuery("select pk from t_user where name=? and password=?;", array($user, $password));
+        $query = $this->connexion->selectQuery("select pk from t_user where name=? and password=?;", array($username, $password));
         if ($query->rowCount() == 1) {
             $result = $query->fetch();
         } else {
