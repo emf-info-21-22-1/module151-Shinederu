@@ -19,6 +19,7 @@ class MessageCtrl
     public function getAllMessage()
     {
         $listeMessage = $this->messageDBmanager->getAll();
+        http_response_code(200);
         return json_encode(array('messages' => $listeMessage));
     }
 
@@ -35,11 +36,13 @@ class MessageCtrl
 
             if ($status) {
 
-                $infos = "Message posté)";
+                $infos = "Message posté";
+                http_response_code(200);
 
             } else {
 
-                $infos = "Une erreur est survenue. Le message n'a pas été posté !)";
+                $infos = "Une erreur est survenue. Le message n'a pas été posté !";
+                http_response_code(500);
 
             }
 
@@ -47,6 +50,7 @@ class MessageCtrl
 
             $infos = "Aucun utilisateur connecté, impossible de publier le message";
             $status = false;
+            http_response_code(401);
 
         }
         return json_encode(array('succes' => $status, 'infos' => $infos));
@@ -64,11 +68,13 @@ class MessageCtrl
 
             if ($status) {
 
-                $infos = "Message supprimé)";
+                $infos = "Message supprimé";
+                http_response_code(200);
 
             } else {
 
-                $infos = "Une erreur est survenue. Le message n'a pas été supprimé !)";
+                $infos = "Une erreur est survenue. Le message n'a pas été supprimé !";
+                http_response_code(401);
                 
             }
 
@@ -78,10 +84,12 @@ class MessageCtrl
             if (isset($currentUserName) == true) {
 
                 $info = 'Droits insuffisants. Opération impossible !';
+                http_response_code(401);
 
             } else {
 
                 $info = 'Aucun utilisateur actuellement connecté. Opération impossible !';
+                http_response_code(401);
 
             }
 

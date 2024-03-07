@@ -35,11 +35,12 @@ class LoginCtrl
             $this->sessionManager->set('isAdmin', $newUser->getIsAdmin());
 
             $infos = 'Utilisateur connecté';
+            http_response_code(200);
 
         } else {
 
             $infos = 'Identifiant(s) invalide(s)';
-
+            http_response_code(401);
         }
 
         return json_encode(array('status' => $status, 'infos' => $infos));
@@ -50,7 +51,7 @@ class LoginCtrl
     {
         $this->sessionManager->clear();
         return json_encode(array('status' => true, 'infos' => 'Session vidée. Passage en mode visiteur !'));
-
+        http_response_code(200);
     }
 
 
@@ -65,17 +66,22 @@ class LoginCtrl
 
             if ($status) {
                 $infos = "Création de l'utilisateur. Vous pouvez vous connecter !";
+                http_response_code(200);
             } else {
                 $infos = "Echec de la création de l'utilisateur. Essayez de renter, sinon contactez un admin !";
+                http_response_code(500);
             }
 
         } else {
             $status = false;
             $infos = "Ce nom d'utilisateur est déjà pris... Tentez autre chose !";
+            http_response_code(401);
         }
 
         return json_encode(array('status' => $status, 'infos' => $infos));
 
     }
+
+
 }
 ?>

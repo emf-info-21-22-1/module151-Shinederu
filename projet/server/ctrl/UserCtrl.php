@@ -2,7 +2,7 @@
 require_once('wrk/UserDBmanager.php');
 require_once('ctrl/SessionManager.php');
 require_once('beans/User.php');
-class UserManager
+class UserCtrl
 {
 
     private $userDBmanager;
