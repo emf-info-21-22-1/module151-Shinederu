@@ -29,9 +29,9 @@ class LoginCtrl
         if ($status == true) {
             $newUser = $this->userDBmanager->getByPseudo($username);
 
-            $this->sessionManager->set('username', $newUser->getPseudo);
-            $this->sessionManager->set('pk', $newUser->getPK);
-            $this->sessionManager->set('isAdmin', $newUser->getIsAdmin);
+            $this->sessionManager->set('username', $newUser->getPseudo());
+            $this->sessionManager->set('pk', $newUser->getPk());
+            $this->sessionManager->set('isAdmin', $newUser->getIsAdmin());
 
             $infos = 'Utilisateur connecté';
 
@@ -48,7 +48,7 @@ class LoginCtrl
     public function disconnect()
     {
         $this->sessionManager->clear();
-        return json_encore(array('status' => true, 'infos' => 'Session vidée. Passage en mode visiteur !'));
+        return json_encode(array('status' => true, 'infos' => 'Session vidée. Passage en mode visiteur !'));
 
     }
 

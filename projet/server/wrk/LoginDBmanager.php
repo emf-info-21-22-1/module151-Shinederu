@@ -12,20 +12,31 @@ class LoginDBManager
     //retourne boolean en fonction de la correspondance des mdp
     public function checkLogin($username, $password)
     {
-        $result = $this->connexion->selectQuery("select password from t_user where pseudo=?", array($username));
 
-        if (password_verify($password, $result)) {
-            $status = true;
+        echo "Username: " . $username . "<br/>";
+        echo "Password: " . $password . "<br/>";
+
+        $result = $this->connexion->selectQuery("SELECT password FROM t_user WHERE pseudo=?;", array($username));
+
+
+        if (count($result) > 0) {
+
+            $passwordFromDB = $result[0]['password'];
+            if (password_verify($password, $passwordFromDB)) {
+                $status = true;
+            } else {
+                $status = false;
+            }
+
         } else {
             $status = false;
         }
-
         return $status;
     }
 
     public function checkUsernameAlreadyExist($username)
     {
-        $result = $this->connexion->selectQuery("select pkUser from t_user where pseudo=?", array($username));
+        $result = $this->connexion->selectQuery('SELECT pkUser FROM t_user WHERE pseudo=?;', array($username));
         $status = false;
         if (count($result) > 0) {
             $status = true;

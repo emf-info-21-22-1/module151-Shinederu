@@ -9,7 +9,7 @@ class User implements JsonSerializable
     public function __construct($pk, $pseudo, $isAdmin)
     {
         $this->pk = $pk;
-        $this->date = $pseudo;
+        $this->pseudo = $pseudo;
         $this->isAdmin = $isAdmin;
     }
 
