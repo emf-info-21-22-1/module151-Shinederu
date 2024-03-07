@@ -3,7 +3,6 @@ header('Access-Control-Allow-Origin: http://localhost:8980');
 header('Access-Control-Allow-Credentials: true');
 include_once('ctrl/UserManager.php');
 
-session_start();
 $userManager = new UserManager();
 if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     if ($_DELETE['action'] == "delete") {

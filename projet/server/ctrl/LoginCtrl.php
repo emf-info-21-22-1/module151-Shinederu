@@ -18,6 +18,7 @@ class LoginCtrl
         $this->loginDBmanager = new LoginDBManager();
         $this->userDBmanager = new UserDBManager();
         $this->sessionManager = SessionManager::getInstance();
+   
 
     }
 
