@@ -69,4 +69,17 @@ class SessionManager
     {
         return array_key_exists($key, $_SESSION);
     }
+
+    /**
+     * In a session exist, destroy it
+     */
+    public static function close_session() : bool
+    {
+        $status = false;
+        if (session_id()) {
+            $status = true;
+            session_destroy();
+        }
+        return $status;
+    }
 }

@@ -18,40 +18,51 @@ class LoginCtrl
         $this->loginDBmanager = new LoginDBManager();
         $this->userDBmanager = new UserDBManager();
         $this->sessionManager = SessionManager::getInstance();
-   
-
     }
 
     public function checkLogin($username, $password)
     {
+        if ($this->sessionManager->get('logged') == false) {
+            $status = $this->loginDBmanager->checkLogin($username, $password);
 
-        $status = $this->loginDBmanager->checkLogin($username, $password);
+            if ($status == true) {
+                
+                $newUser = $this->userDBmanager->getByPseudo($username);
 
-        if ($status == true) {
-            $newUser = $this->userDBmanager->getByPseudo($username);
+                $this->sessionManager->set('username', $newUser->getPseudo());
+                $this->sessionManager->set('pk', $newUser->getPk());
+                $this->sessionManager->set('isAdmin', $newUser->getIsAdmin());
+                $this->sessionManager->set('logged', true);
 
-            $this->sessionManager->set('username', $newUser->getPseudo());
-            $this->sessionManager->set('pk', $newUser->getPk());
-            $this->sessionManager->set('isAdmin', $newUser->getIsAdmin());
-
-            $infos = 'Utilisateur connecté';
-            http_response_code(200);
-
+                $infos = 'Utilisateur connecté';
+                http_response_code(200);
+            } else {
+                $infos = 'Identifiant(s) invalide(s)';
+                http_response_code(401);
+            }
         } else {
-
-            $infos = 'Identifiant(s) invalide(s)';
+            $infos = 'Utilisateur déjà connecté';
+            $status = false;
             http_response_code(401);
         }
-
-        return json_encode(array('status' => $status, 'infos' => $infos));
-
+        return json_encode(array('status' => $status, 'infos' => $infos), JSON_UNESCAPED_UNICODE );
     }
 
     public function disconnect()
     {
-        $this->sessionManager->clear();
-        return json_encode(array('status' => true, 'infos' => 'Session vidée. Passage en mode visiteur !'));
+        $status = false;
+
+        if($this->sessionManager->get('logged') == true){
+
+        $status = $this->sessionManager->clear();
+        $this->sessionManager->set('logged', false);
         http_response_code(200);
+        $infos = 'Session détruite. Passage en mode visiteur !';
+        
+        } else {
+            $infos = 'Aucun utilisateur connecté';
+        }
+        return json_encode(array('status' => $status, 'infos' => $infos), JSON_UNESCAPED_UNICODE );
     }
 
 
@@ -78,7 +89,7 @@ class LoginCtrl
             http_response_code(401);
         }
 
-        return json_encode(array('status' => $status, 'infos' => $infos));
+        return json_encode(array('status' => $status, 'infos' => $infos), JSON_UNESCAPED_UNICODE );
 
     }
 

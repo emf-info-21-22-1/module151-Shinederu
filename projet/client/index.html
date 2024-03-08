@@ -3,17 +3,30 @@
 
 <head>
   <title>Ananas</title>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
   <script type="text/javascript" src="javascripts/helpers/jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="javascripts/controllers/indexCtrl.js"></script>
+  <script type="text/javascript" src="javascripts/services/servicesHttp.js" async></script>
 </head>
 
 <body>
   <banner>
-    <h1>Ananas</h1>
+    <table>
+      <td>
+        <tr>
+          <h1>Ananas</h1>
+        </tr>
+        <tr >
+          <a href="login.html">login/connexion</a>
+        </tr>
+      </td>
+    </table>
+    
   </banner>
   <div id="conteneur">
+    <div id="newMessage"></div>
+    <div id="listMessages"></div>
   </div>
 </body>
 

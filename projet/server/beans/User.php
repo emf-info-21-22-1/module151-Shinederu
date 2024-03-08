@@ -32,7 +32,7 @@ class User implements JsonSerializable
         return [
             'pk' => $this->pk,
             'pseudo' => $this->pseudo,
-            'message' => $this->isAdmin,
+            'isAdmin' => $this->isAdmin,
         ];
     }
 

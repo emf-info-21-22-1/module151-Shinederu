@@ -20,7 +20,7 @@ class MessageCtrl
     {
         $listeMessage = $this->messageDBmanager->getAll();
         http_response_code(200);
-        return json_encode(array('messages' => $listeMessage));
+        return json_encode(array('messages' => $listeMessage), JSON_UNESCAPED_UNICODE );
     }
 
     //Retourne un boolean avec une info
@@ -53,7 +53,7 @@ class MessageCtrl
             http_response_code(401);
 
         }
-        return json_encode(array('succes' => $status, 'infos' => $infos));
+        return json_encode(array('succes' => $status, 'infos' => $infos), JSON_UNESCAPED_UNICODE );
     }
 
     public function deleteMessage($pkMessage)
@@ -83,12 +83,12 @@ class MessageCtrl
             $status = false;
             if (isset($currentUserName) == true) {
 
-                $info = 'Droits insuffisants. Opération impossible !';
+                $infos = 'Droits insuffisants. Opération impossible !';
                 http_response_code(401);
 
             } else {
 
-                $info = 'Aucun utilisateur actuellement connecté. Opération impossible !';
+                $infos = 'Aucun utilisateur actuellement connecté. Opération impossible !';
                 http_response_code(401);
 
             }
@@ -96,7 +96,7 @@ class MessageCtrl
 
 
         }
-        return json_encode(array('succes' => $status, 'infos' => $infos));
+        return json_encode(array('succes' => $status, 'infos' => $infos), JSON_UNESCAPED_UNICODE );
     }
 
 

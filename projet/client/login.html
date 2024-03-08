@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
     <script type="text/javascript" src="javascripts/helpers/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="javascripts/controllers/loginCtrl.js"></script>
+    <script type="text/javascript" src="javascripts/services/servicesHttp.js" async></script>
+    <script type="text/javascript" src="javascripts/controllers/LoginCtrl.js"></script>
+
 </head>
 
 <body>
@@ -19,28 +21,28 @@
                 <td id="connexion-conteneur">
                     <h2>Connexion</h2>
                     <p>Nom d'utilisateur:</p>
-                    <input type="text" id="login-username" name="usermane" required minlength="1" maxlength="254"
+                    <input type="text" id="login-username" maxlength="254"
                         size="30" />
                     <p>Mot de passe:</p>
-                    <input type="text" id="login-password" name="password" required minlength="1" maxlength="254"
+                    <input type="password" id="login-password" maxlength="254"
                         size="30" />
                     <br />
                     <br />
-                    <button type="button">Se connecter !</button>
+                    <button id="btn_connexion">Se connecter !</button>
                 </td>
                 </td>
                 <td id="inscription-conteneur">
                     <h2>Inscription</h2>
                     <p>Nom d'utilisateur:</p>
-                    <input type="text" id="register-username" name="register-username" required minlength="1"
+                    <input type="text" id="register-username" required minlength="1"
                         maxlength="254" size="30" />
                     <p>Mot de passe:</p>
-                    <input type="text" id="username" name="usermane" required minlength="1" maxlength="254" size="30" />
+                    <input type="password" id="register-password" maxlength="254" size="30" />
                     <p>Confirmer le mot de passe:</p>
-                    <input type="text" id="username" name="usermane" required minlength="1" maxlength="254" size="30" />
+                    <input type="password" id="confirm-password" maxlength="254" size="30" />
                     <br />
                     <br />
-                    <button type="button">S'inscrire!</button>
+                    <button id="btn_register" type="submit">S'inscrire!</button>
                 </td>
             </tr>
         </table>

@@ -10,18 +10,23 @@ class UserDBManager
         $this->connexion = connexion::getInstance();
     }
 
-    public function getAll()
+    public function getAllUsers()
     {
-
         $query = $this->connexion->selectQuery("select pkUser, pseudo, isAdmin from t_user;", null);
 
-        $result = array();
+        $userList = array();
         foreach ($query as $row) {
-            $user = new User($row['pkUser'], $row['pseudo'], $row['isAdmin']);
-            $result[] = $user;
+
+
+            $isAdmin = false;
+        if ($row['isAdmin'] == 1) {
+            $isAdmin = true;
+        }
+            $user = new User($row['pkUser'], $row['pseudo'], $isAdmin);
+            $userList[] = $user;
         }
 
-        return $result;
+        return $userList;
     }
 
     //retourne l'utilisateur en partant du pseudo (unique dans la DB)
@@ -51,7 +56,7 @@ class UserDBManager
     }
 
 
-    public function deleteOne($pkUser)
+    public function deleteUser($pkUser)
     {
 
         $query = $this->connexion->executeQuery("delete from t_message where pkMessage = ?;", array($pkUser));
